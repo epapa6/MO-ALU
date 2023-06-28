@@ -50,20 +50,55 @@ begin
     begin
 
 		wait for CLK_PERIOD;
-
-        a_tb <= "11111111";
-		b_tb <= "10000001";
+		
+		a_tb <= "01010101";
+		b_tb <= "00010001";
 		carry_in_tb <= '0';
-        wait for CLK_PERIOD;
+		wait for CLK_PERIOD;
 		
 		a_tb <= "01010101";
 		b_tb <= "00010001";
 		carry_in_tb <= '1';
 		wait for CLK_PERIOD;
 		
-		a_tb <= "11111111";
-		b_tb <= "00010001";
-		carry_in_tb <= '1';
+        a_tb <= "01011111";
+		b_tb <= "01000000";
+		carry_in_tb <= '0';
+        wait for CLK_PERIOD;
+		
+		a_tb <= "00100000";
+		b_tb <= "01100000";
+		carry_in_tb <= '0';
+        wait for CLK_PERIOD;
+		
+		a_tb <= "01100000";
+		b_tb <= "00100000";
+		carry_in_tb <= '0';
+        wait for CLK_PERIOD;
+		
+		a_tb <= "01100000";
+		b_tb <= "01100000";
+		carry_in_tb <= '0';
+        wait for CLK_PERIOD;
+		
+		a_tb <= "10000000";
+		b_tb <= "10000000";
+		carry_in_tb <= '0';
+		wait for CLK_PERIOD;
+		
+		a_tb <= "11000000";
+		b_tb <= "10000000";
+		carry_in_tb <= '0';
+		wait for CLK_PERIOD;
+		
+		a_tb <= "10000000";
+		b_tb <= "11000000";
+		carry_in_tb <= '0';
+		wait for CLK_PERIOD;
+		
+		a_tb <= "10100000";
+		b_tb <= "10100000";
+		carry_in_tb <= '0';
 		
     end process;
 
