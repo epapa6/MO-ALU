@@ -1,6 +1,6 @@
 -------------------------------------------------------------------------------
 --
--- Title       : sipo_testbench
+-- Title       : SIPO_Testbench
 -- Design      : MOALU
 -- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
 -- Company     : Universita' degli Studi di Milano Bicocca
@@ -14,13 +14,13 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity sipo_testbench is
-end sipo_testbench;
+entity SIPO_Testbench is
+end SIPO_Testbench;
 
-architecture sipo_testbench_behavior of sipo_testbench is
+architecture SIPO_Testbench_behavior of SIPO_Testbench is
 	
 	-- Component declaration
-    component sipo is
+    component SIPO is
         generic (
             Nb : integer := 8
         );
@@ -31,7 +31,7 @@ architecture sipo_testbench_behavior of sipo_testbench is
             data_in  : in  std_logic;
             data_out     : out std_logic_vector(Nb-1 downto 0)
         );
-    end component sipo;
+    end component SIPO;
 	
 	constant N: integer := 8; -- Data bits
 	constant CLK_PERIOD : time := 10 ns; -- Clock period
@@ -47,51 +47,63 @@ architecture sipo_testbench_behavior of sipo_testbench is
 
 begin
     -- Instantiate the SIPO module
-    sipo_tb: sipo
-    generic map (
-        Nb => N
-    )
-    port map (
-        clk    => clk_tb,
-        reset  => reset_tb,
-        enable => enable_tb,
-        data_in   => data_in_tb,
-        data_out      => data_out_tb
-    );
+    SIPO_tb	: SIPO generic map (Nb => N) port map (clk_tb, reset_tb, enable_tb, data_in_tb, data_out_tb);
 
     -- Clock process
     clk_process: process
     begin
-        clk_tb <= '0';
-        wait for CLK_PERIOD / 2;
-        clk_tb <= '1';
-        wait for CLK_PERIOD / 2;
-        
+		clk_tb <= not clk_tb;
+		wait for CLK_PERIOD / 2;
+    end process;
+	
+	-- Enable process
+    enable_process: process
+    begin
+        wait for CLK_PERIOD;
+		enable_tb <= not enable_tb;
+		wait for CLK_PERIOD * 8;
+		enable_tb <= not enable_tb;
+		
+    end process;
+	
+	-- Reset process
+    reset_process: process
+    begin
+		wait for CLK_PERIOD;
+		reset_tb <= not reset_tb;
+        wait for CLK_PERIOD * 10;
+		reset_tb <= not reset_tb;
     end process;
 
     -- Stimulus process
     stimulus_process: process
     begin
-        reset_tb <= '0'; 
-        enable_tb <= '0';
+		
         data_in_tb <= '0';
         wait for CLK_PERIOD;
-
-        reset_tb <= '1'; 
-        enable_tb <= '1'; 
-        data_in_tb <= '1'; 
-        
-        wait for CLK_PERIOD * N + 2 ns;
-
-        reset_tb <= '0'; 
-        wait for CLK_PERIOD;
-
-        enable_tb <= '0';
-        data_in_tb <= '0'; 
 		
-		wait for 3 ns;
+		data_in_tb <= '1';
+        wait for CLK_PERIOD;
+		
+		data_in_tb <= '0';
+        wait for CLK_PERIOD;
+		
+		data_in_tb <= '1';
+        wait for CLK_PERIOD;
+		
+		data_in_tb <= '0';
+        wait for CLK_PERIOD;
+		
+		data_in_tb <= '1';
+        wait for CLK_PERIOD;
+		
+		data_in_tb <= '0';
+        wait for CLK_PERIOD;
+		
+		data_in_tb <= '1';
+        wait for CLK_PERIOD;
 
     end process;
 
 
-end sipo_testbench_behavior;
+end SIPO_Testbench_behavior;

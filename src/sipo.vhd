@@ -1,6 +1,6 @@
 -------------------------------------------------------------------------------
 --
--- Title       : sipo
+-- Title       : Sipo
 -- Design      : MOALU
 -- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
 -- Company     : Universita' degli Studi di Milano Bicocca
@@ -14,34 +14,42 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity sipo is
-	generic (
+entity SIPO is
+	generic(
 		Nb : integer := 8
-		);
+		);	
 	 port(
-		 clk : in STD_LOGIC;
-		 reset : in STD_LOGIC;
+	 	 clk : in STD_LOGIC;
+	 	 reset : in STD_LOGIC;
 		 enable : in STD_LOGIC;
 		 data_in : in STD_LOGIC;
 		 data_out : out STD_LOGIC_VECTOR(Nb-1 downto 0)
 	     );
-end sipo;
+end SIPO;
 
-architecture sipo_behavior of sipo is
+architecture SIPO_behavior of SIPO is
 
-	signal data : std_logic_vector(Nb-1 downto 0);
+component DFlipFlop
+	port(
+	 	 clk : in STD_LOGIC;
+	 	 reset : in STD_LOGIC;
+		 enable : in STD_LOGIC;
+		 d : in STD_LOGIC;
+		 q : out STD_LOGIC
+	     );
+end component;
+
+signal q_signal: std_logic_vector(Nb-1 downto 0);
 
 begin
 	
-	process(clk, reset)
-        begin
-            if ( reset = '0' ) then
-                data <= (others => '0');
-            elsif ( rising_edge(clk) and enable = '1' ) then
-                data <= data_in & data(Nb-1 downto 1);
-            end if;
-        end process;
-    
-    data_out <= data;
+	ff1 : DFlipFlop port map(clk, reset, enable, data_in, q_signal(0));
+	
+	g1 : for k in Nb-1 downto 1 
+		generate
+		ffi : DFlipFlop port map(clk, reset, enable, q_signal(k-1), q_signal(k));
+		end generate;
 		
-end sipo_behavior;
+	data_out <= q_signal;
+	
+end SIPO_behavior;

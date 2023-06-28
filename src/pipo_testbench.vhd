@@ -1,6 +1,6 @@
 -------------------------------------------------------------------------------
 --
--- Title       : pipo_testbench
+-- Title       : PIPO_Testbench
 -- Design      : MOALU
 -- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
 -- Company     : Universita' degli Studi di Milano Bicocca
@@ -14,13 +14,13 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity pipo_testbench is
-end pipo_testbench;
+entity PIPO_Testbench is
+end PIPO_Testbench;
 
-architecture pipo_testbench_behavior of pipo_testbench is
+architecture PIPO_Testbench_behavior of PIPO_Testbench is
 	
 	-- Component declaration
-    component pipo is
+    component PIPO is
         generic (
             Nb : integer := 8
         );
@@ -31,7 +31,7 @@ architecture pipo_testbench_behavior of pipo_testbench is
             data_in  : in  std_logic_vector(Nb-1 downto 0);
             data_out     : out std_logic_vector(Nb-1 downto 0)
         );
-    end component pipo;
+    end component PIPO;
 	
 	constant N: integer := 8; -- Data bits
 	constant CLK_PERIOD : time := 10 ns; -- Clock period
@@ -40,57 +40,51 @@ architecture pipo_testbench_behavior of pipo_testbench is
     signal clk_tb    : std_logic := '0';
     signal reset_tb  : std_logic := '0';
     signal enable_tb : std_logic := '0';
-    signal data_in_tb   : std_logic_vector(N-1 downto 0);
-    signal data_out_tb      : std_logic_vector(N-1 downto 0);
+    signal data_in_tb : std_logic_vector(N-1 downto 0);
+    signal data_out_tb : std_logic_vector(N-1 downto 0);
     
     
 
 begin
     -- Instantiate the PIPO module
-    pipo_tb: pipo
-    generic map (
-        Nb => N
-    )
-    port map (
-        clk    => clk_tb,
-        reset  => reset_tb,
-        enable => enable_tb,
-        data_in   => data_in_tb,
-        data_out      => data_out_tb
-    );
+    PIPO_tb: PIPO generic map (Nb => N) port map (clk_tb, reset_tb, enable_tb, data_in_tb, data_out_tb);
 
     -- Clock process
     clk_process: process
     begin
-        clk_tb <= '0';
-        wait for CLK_PERIOD / 2;
-        clk_tb <= '1';
-        wait for CLK_PERIOD / 2;
-        
+		clk_tb <= not clk_tb;
+		wait for CLK_PERIOD / 2;
+    end process;
+	
+	-- Enable process
+    enable_process: process
+    begin
+        wait for CLK_PERIOD * 2;
+		enable_tb <= not enable_tb;
+    end process;
+	
+	-- Reset process
+    reset_process: process
+    begin
+		wait for CLK_PERIOD;
+		reset_tb <= not reset_tb;
+        wait for CLK_PERIOD * 4;
+		reset_tb <= not reset_tb;
     end process;
 
     -- Stimulus process
     stimulus_process: process
     begin
-        reset_tb <= '0'; 
-        enable_tb <= '0';
+  
         data_in_tb <= (others => '0');
         wait for CLK_PERIOD;
-
-        reset_tb <= '1'; 
-        enable_tb <= '1'; 
+ 
         data_in_tb <= "10101010"; 
-        
         wait for CLK_PERIOD * N + 2 ns;
 
-        reset_tb <= '0'; 
-        wait for CLK_PERIOD;
-
-        enable_tb <= '0';
         data_in_tb <= (others => '0'); 
-		
 		wait for 3 ns;
 
     end process;
 
-end pipo_testbench_behavior;
+end PIPO_testbench_behavior;
