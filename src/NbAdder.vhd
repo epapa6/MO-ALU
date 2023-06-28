@@ -15,15 +15,13 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 
 entity NbAdder is
-	generic (
-		Nb : integer := 8
-		);	
-	 port(
-	 	 a : in STD_LOGIC_VECTOR(Nb-1 downto 0);
-		 b : in STD_LOGIC_VECTOR(Nb-1 downto 0);
-	 	 carry_in : in STD_LOGIC;
-		 sum : out STD_LOGIC_VECTOR(Nb-1 downto 0)
-	     );
+	generic (Nb : integer := 8);	
+	port(
+	 	a : in STD_LOGIC_VECTOR(Nb-1 downto 0);
+		b : in STD_LOGIC_VECTOR(Nb-1 downto 0);
+	 	carry_in : in STD_LOGIC;
+		sum : out STD_LOGIC_VECTOR(Nb-1 downto 0)
+	);
 end NbAdder;
 
 architecture NbAdder_behavior of NbAdder is
@@ -34,17 +32,17 @@ architecture NbAdder_behavior of NbAdder is
 			b : in STD_LOGIC;
 			carry_in : in STD_LOGIC;
     		sum : out STD_LOGIC; 
-			carry_out :out STD_LOGIC
-			);
+			carry_out : out STD_LOGIC
+		);
 	end component;
 		
-	signal carries: STD_LOGIC_VECTOR(Nb downto 0);	
+	signal carries : STD_LOGIC_VECTOR(Nb downto 0);	
 	
-	begin
+begin
 
 	g1 : for k in Nb-1 downto 0 generate
-         fai : FullAdder port map(a(k), b(k), carries(k), sum(k), carries(k+1));
-         end generate;
+        fai : FullAdder port map(a(k), b(k), carries(k), sum(k), carries(k+1));
+    end generate;
 
 	carries(0) <= carry_in;
 

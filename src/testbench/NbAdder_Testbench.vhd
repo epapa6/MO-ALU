@@ -21,9 +21,7 @@ architecture NbAdder_Testbench_behavior of NbAdder_Testbench is
 
 	-- Component declaration
     component NbAdder is
-        generic (
-            Nb : integer := 8
-        );
+        generic (Nb : integer := 8);
         port(
 	 	 	a : in STD_LOGIC_VECTOR(Nb-1 downto 0);
 		 	b : in STD_LOGIC_VECTOR(Nb-1 downto 0);
@@ -32,7 +30,8 @@ architecture NbAdder_Testbench_behavior of NbAdder_Testbench is
 	    );
     end component NbAdder;
 	
-	constant N: integer := 8; -- Data bits
+	-- Testbench constant
+	constant N : integer := 8; -- Data bits
 	constant CLK_PERIOD : time := 10 ns; -- Clock period
 	
     -- Testbench signals
@@ -40,18 +39,18 @@ architecture NbAdder_Testbench_behavior of NbAdder_Testbench is
     signal b_tb : STD_LOGIC_VECTOR(N-1 downto 0);
 	signal carry_in_tb : STD_LOGIC;
 	signal sum_tb : STD_LOGIC_VECTOR(N-1 downto 0);
-
-	
 	
 begin
 
 	-- Instantiate the NbAdder module
     NbAdder_tb : NbAdder generic map (Nb => N) port map (a_tb, b_tb, carry_in_tb, sum_tb);
 	
-	-- Stimulus process
-    stimulus_process: process
+	-- Main process
+    main_process: process
     begin
-		
+
+		wait for CLK_PERIOD;
+
         a_tb <= "11111111";
 		b_tb <= "10000001";
 		carry_in_tb <= '0';
@@ -65,7 +64,6 @@ begin
 		a_tb <= "11111111";
 		b_tb <= "00010001";
 		carry_in_tb <= '1';
-		wait for CLK_PERIOD;
 		
     end process;
 

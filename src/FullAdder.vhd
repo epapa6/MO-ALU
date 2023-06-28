@@ -2,8 +2,8 @@
 --
 -- Title       : FullAdder
 -- Design      : MOALU
--- Author      : e.papa6@campus.unimib.it
--- Company     : Università degli Studi di Milano Bicocca
+-- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
+-- Company     : Universita' degli Studi di Milano Bicocca
 --
 -------------------------------------------------------------------------------
 --
@@ -15,13 +15,13 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 
 entity FullAdder is
-	 port(
-		 a : in STD_LOGIC;
-		 b : in STD_LOGIC;
-		 carry_in : in STD_LOGIC;
-		 sum : out STD_LOGIC;
-		 carry_out : out STD_LOGIC
-	     );
+	port(
+		a : in STD_LOGIC;
+		b : in STD_LOGIC;
+		carry_in : in STD_LOGIC;
+		sum : out STD_LOGIC;
+		carry_out : out STD_LOGIC
+	);
 end FullAdder;
 
 architecture FullAdder_behavior of FullAdder is
@@ -35,9 +35,9 @@ architecture FullAdder_behavior of FullAdder is
 		);
     end component;
 	
-signal sum1: STD_LOGIC;
-signal carry_out0: STD_LOGIC;
-signal carry_out1: STD_LOGIC;
+	signal sum1 : STD_LOGIC;
+	signal carry_out0 : STD_LOGIC;
+	signal carry_out1 : STD_LOGIC;
 
 begin
 
