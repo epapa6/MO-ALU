@@ -41,8 +41,8 @@ architecture FullAdder_behavior of FullAdder is
 
 begin
 
-	ha1: HalfAdder port map(a, b, sum1, carry_out0);
-	ha2: HalfAdder port map(sum1, carry_in, sum, carry_out1);
+	ha1 : HalfAdder port map(a, b, sum1, carry_out0);
+	ha2 : HalfAdder port map(sum1, carry_in, sum, carry_out1);
 	carry_out <= carry_out0 or carry_out1;
 
 end FullAdder_behavior;

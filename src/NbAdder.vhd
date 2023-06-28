@@ -19,7 +19,6 @@ entity NbAdder is
 	port(
 	 	a : in STD_LOGIC_VECTOR(Nb-1 downto 0);
 		b : in STD_LOGIC_VECTOR(Nb-1 downto 0);
-	 	carry_in : in STD_LOGIC;
 		sum : out STD_LOGIC_VECTOR(Nb-1 downto 0)
 	);
 end NbAdder;
@@ -61,7 +60,7 @@ begin
 	
 	mux : Mux_1x2 port map (sel, s, zero, sum); 
 	
-	carries(0) <= carry_in;
+	carries(0) <= '0';
 	sel <= overflow or underflow;
 	underflow <= ( not carries(Nb-2) and a(Nb-1) and not a(Nb-2) and b(Nb-1) ) or
 				 ( not carries(Nb-2) and a(Nb-1) and b(Nb-1) and not b(Nb-2) ) or

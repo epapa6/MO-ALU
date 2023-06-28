@@ -25,7 +25,6 @@ architecture NbAdder_Testbench_behavior of NbAdder_Testbench is
         port(
 	 	 	a : in STD_LOGIC_VECTOR(Nb-1 downto 0);
 		 	b : in STD_LOGIC_VECTOR(Nb-1 downto 0);
-	 	 	carry_in : in STD_LOGIC;
 		 	sum : out STD_LOGIC_VECTOR(Nb-1 downto 0)
 	    );
     end component NbAdder;
@@ -37,13 +36,12 @@ architecture NbAdder_Testbench_behavior of NbAdder_Testbench is
     -- Testbench signals
 	signal a_tb : STD_LOGIC_VECTOR(N-1 downto 0);
     signal b_tb : STD_LOGIC_VECTOR(N-1 downto 0);
-	signal carry_in_tb : STD_LOGIC;
 	signal sum_tb : STD_LOGIC_VECTOR(N-1 downto 0);
 	
 begin
 
 	-- Instantiate the NbAdder module
-    NbAdder_tb : NbAdder generic map (Nb => N) port map (a_tb, b_tb, carry_in_tb, sum_tb);
+    NbAdder_tb : NbAdder generic map (Nb => N) port map (a_tb, b_tb, sum_tb);
 	
 	-- Main process
     main_process: process
@@ -53,52 +51,42 @@ begin
 		
 		a_tb <= "01010101";
 		b_tb <= "00010001";
-		carry_in_tb <= '0';
 		wait for CLK_PERIOD;
 		
 		a_tb <= "01010101";
 		b_tb <= "00010001";
-		carry_in_tb <= '1';
 		wait for CLK_PERIOD;
 		
         a_tb <= "01011111";
 		b_tb <= "01000000";
-		carry_in_tb <= '0';
         wait for CLK_PERIOD;
 		
 		a_tb <= "00100000";
 		b_tb <= "01100000";
-		carry_in_tb <= '0';
         wait for CLK_PERIOD;
 		
 		a_tb <= "01100000";
 		b_tb <= "00100000";
-		carry_in_tb <= '0';
         wait for CLK_PERIOD;
 		
 		a_tb <= "01100000";
 		b_tb <= "01100000";
-		carry_in_tb <= '0';
         wait for CLK_PERIOD;
 		
 		a_tb <= "10000000";
 		b_tb <= "10000000";
-		carry_in_tb <= '0';
 		wait for CLK_PERIOD;
 		
 		a_tb <= "11000000";
 		b_tb <= "10000000";
-		carry_in_tb <= '0';
 		wait for CLK_PERIOD;
 		
 		a_tb <= "10000000";
 		b_tb <= "11000000";
-		carry_in_tb <= '0';
 		wait for CLK_PERIOD;
 		
 		a_tb <= "10100000";
 		b_tb <= "10100000";
-		carry_in_tb <= '0';
 		
     end process;
 

@@ -29,19 +29,18 @@ architecture TwoComplement_behavior of TwoComplement is
     	port (
       		a : in STD_LOGIC_VECTOR(Nb-1 downto 0);
 			b : in STD_LOGIC_VECTOR(Nb-1 downto 0);
-	 		carry_in : in STD_LOGIC;
 			sum : out STD_LOGIC_VECTOR(Nb-1 downto 0)
     	);
   	end component NbAdder;
   
   	signal data_inn : STD_LOGIC_VECTOR(Nb-1 downto 0);
-	signal zero : STD_LOGIC_VECTOR(Nb-1 downto 0);
+	signal one : STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
 
 begin
    
-	ca : NbAdder generic map (Nb => Nb) port map (data_inn, zero, '1', data_out);
+	ca : NbAdder generic map (Nb => Nb) port map (data_inn, one, data_out);
 	
 	data_inn <= not data_in;
-	zero <= (others => '0');
+	one(0) <= '1';
 
 end TwoComplement_behavior;
