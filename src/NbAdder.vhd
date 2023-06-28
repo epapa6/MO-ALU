@@ -35,11 +35,23 @@ architecture NbAdder_behavior of NbAdder is
 			carry_out : out STD_LOGIC
 		);
 	end component;
+	
+	component Mux_1x2 is
+		generic (Nb : integer := 8);
+		port( 
+			selector : in STD_LOGIC;
+			data_in_0 : in STD_LOGIC_VECTOR(Nb-1 downto 0); 
+			data_in_1 : in STD_LOGIC_VECTOR(Nb-1 downto 0);
+			data_out : out STD_LOGIC_VECTOR(Nb-1 downto 0)
+		);
+	end component;
 		
 	signal carries : STD_LOGIC_VECTOR(Nb downto 0);
 	signal s : STD_LOGIC_VECTOR(Nb-1 downto 0);
 	signal overflow : STD_LOGIC := '0';
 	signal underflow : STD_LOGIC := '0';
+	signal zero : STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
+	signal sel : STD_LOGIC := '0';
 	
 begin
 
@@ -47,21 +59,15 @@ begin
         fai : FullAdder port map(a(k), b(k), carries(k), s(k), carries(k+1));
     end generate;
 	
+	mux : Mux_1x2 port map (sel, s, zero, sum); 
+	
 	carries(0) <= carry_in;
-	
-	-- Overflow
-	overflow <= '1' when ((a(Nb-1) = '0' and a(Nb-2) = '1' and b(Nb-1) = '0' and b(Nb-2) = '1') or 
-						  (carries(Nb-2) = '1' and a(Nb-1) = '0' and b(Nb-1) = '0' and b(Nb-2) = '1') or
-						  (carries(Nb-2) = '1' and a(Nb-1) = '0' and a(Nb-2) = '1' and b(Nb-1) = '0')) else
-			    '0';
-			
-	-- Underflow
-	underflow <= '1' when ((carries(Nb-2) = '0' and a(Nb-1) = '1' and a(Nb-2) = '0' and b(Nb-1) = '1') or
-						   (carries(Nb-2) = '0' and a(Nb-1) = '1' and b(Nb-1) = '1' and b(Nb-2) = '0') or
-						   (a(Nb-1) = '1' and a(Nb-2) = '0' and b(Nb-1) = '1' and b(Nb-2) = '0')) else
-				 '0';
-	
-	sum <= (others => '0') when (overflow = '1' or underflow = '1') else
-		   s;
+	sel <= overflow or underflow;
+	underflow <= ( not carries(Nb-2) and a(Nb-1) and not a(Nb-2) and b(Nb-1) ) or
+				 ( not carries(Nb-2) and a(Nb-1) and b(Nb-1) and not b(Nb-2) ) or
+				 ( a(Nb-1) and not a(Nb-2) and b(Nb-1) and not b(Nb-2) );
+	overflow <= ( not a(Nb-1) and a(Nb-2) and not b(Nb-1) and b(Nb-2) ) or 
+				( carries(Nb-2) and not a(Nb-1) and not b(Nb-1) and b(Nb-2) ) or
+				( carries(Nb-2) and not a(Nb-1) and a(Nb-2) and not b(Nb-1) );
 
 end NbAdder_behavior;
