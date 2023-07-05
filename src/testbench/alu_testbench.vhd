@@ -32,15 +32,15 @@ architecture ALU_Testbench_behavior of ALU_Testbench is
     end component ALU;
 	
 	-- Testbench constant
-	constant N : integer := 8; -- Data bits
+	constant N : integer := 4; -- Data bits
 	constant CLK_PERIOD : time := 10 ns; -- Clock period
 	
     -- Testbench signals
-	signal a_tb : STD_LOGIC_VECTOR(N-1 downto 0);
-    signal b_tb : STD_LOGIC_VECTOR(N-1 downto 0);
-	signal op_a_tb : STD_LOGIC_VECTOR(1 downto 0);
-	signal op_b_tb : STD_LOGIC_VECTOR(1 downto 0);
-	signal r_tb : STD_LOGIC_VECTOR(N-1 downto 0);
+	signal a_tb : STD_LOGIC_VECTOR(N-1 downto 0) := (others => '0');
+    signal b_tb : STD_LOGIC_VECTOR(N-1 downto 0) := (others => '0');
+	signal op_a_tb : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+	signal op_b_tb : STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+	signal r_tb : STD_LOGIC_VECTOR(N-1 downto 0) := (others => '0');
 
 begin
 
@@ -53,8 +53,8 @@ begin
 
 		wait for CLK_PERIOD;
 		
-		a_tb <= "01010101";
-		b_tb <= "00010001";
+		a_tb <= "0101";
+		b_tb <= "0001";
 		op_a_tb <= "00";
 		op_b_tb <= "00";
 		wait for CLK_PERIOD;

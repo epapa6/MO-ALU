@@ -33,8 +33,8 @@ architecture TwoComplement_Testbench_behavior of TwoComplement_Testbench is
 	constant CLK_PERIOD : time := 10 ns; -- Clock period
 	
     -- Testbench signals
-    signal data_in_tb : STD_LOGIC_VECTOR(N-1 downto 0);
-    signal data_out_tb : STD_LOGIC_VECTOR(N-1 downto 0);
+    signal data_in_tb : STD_LOGIC_VECTOR(N-1 downto 0) := (others => '0');
+    signal data_out_tb : STD_LOGIC_VECTOR(N-1 downto 0) := (others => '0');
 
 begin
 

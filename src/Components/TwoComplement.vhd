@@ -17,8 +17,8 @@ use IEEE.std_logic_1164.all;
 entity TwoComplement is
 	generic (Nb : integer := 8);	
 	port(
-		 data_in : in STD_LOGIC_VECTOR(Nb-1 downto 0);
-		 data_out : out STD_LOGIC_VECTOR(Nb-1 downto 0)
+		 data_in : in STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
+		 data_out : out STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0')
 	);
 end TwoComplement;
 
@@ -33,14 +33,14 @@ architecture TwoComplement_behavior of TwoComplement is
     	);
   	end component NbAdder;
   
-  	signal data_inn : STD_LOGIC_VECTOR(Nb-1 downto 0);
+  	signal ndata_in : STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
 	signal one : STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
 
 begin
    
-	ca : NbAdder generic map (Nb => Nb) port map (data_inn, one, data_out);
+	ca : NbAdder generic map (Nb => Nb) port map (ndata_in, one, data_out);
 	
-	data_inn <= not data_in;
+	ndata_in <= not data_in;
 	one(0) <= '1';
 
 end TwoComplement_behavior;

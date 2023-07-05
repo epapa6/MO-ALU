@@ -17,11 +17,11 @@ use IEEE.std_logic_1164.all;
 entity ALU is
 	 generic (Nb : integer := 8);
 	 port(
-		 a : in STD_LOGIC_VECTOR(Nb-1 downto 0);
-		 b : in STD_LOGIC_VECTOR(Nb-1 downto 0);
-		 op_a : in STD_LOGIC_VECTOR(1 downto 0);
-		 op_b : in STD_LOGIC_VECTOR(1 downto 0);
-		 r : out STD_LOGIC_VECTOR(Nb-1 downto 0)
+		 a : in STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
+		 b : in STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
+		 op_a : in STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+		 op_b : in STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+		 r : out STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0')
 	 );
 end ALU;
 
@@ -56,21 +56,19 @@ architecture ALU_behavior of ALU is
 	end component;
 	
 	signal zero : STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
-	signal an : STD_LOGIC_VECTOR(Nb-1 downto 0);
-	signal bn : STD_LOGIC_VECTOR(Nb-1 downto 0);
-	signal a_out : STD_LOGIC_VECTOR(Nb-1 downto 0);
-	signal b_out : STD_LOGIC_VECTOR(Nb-1 downto 0);
+	signal ca : STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
+	signal cb : STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
+	signal a_out : STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
+	signal b_out : STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
 	
 begin
 
-	ca_a : TwoComplement generic map (Nb => Nb)	port map (a, an);
-	ca_b : TwoComplement generic map (Nb => Nb)	port map (b, bn); 
+	ca_a : TwoComplement generic map (Nb => Nb)	port map (a, ca);
+	ca_b : TwoComplement generic map (Nb => Nb)	port map (b, cb); 
 	
-	mux_a : Mux_1x3 generic map (Nb => Nb) port map (op_a, a, an, zero, a_out);
-	mux_b : Mux_1x3 generic map (Nb => Nb) port map (op_b, b, bn, zero, b_out);
+	mux_a : Mux_1x3 generic map (Nb => Nb) port map (op_a, a, ca, zero, a_out);
+	mux_b : Mux_1x3 generic map (Nb => Nb) port map (op_b, b, cb, zero, b_out);
 	
 	nba : NbAdder  generic map (Nb => Nb) port map (a_out, b_out, r);
 	
-	
-
 end ALU_behavior;

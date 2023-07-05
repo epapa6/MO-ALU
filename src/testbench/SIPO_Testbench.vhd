@@ -32,7 +32,7 @@ architecture SIPO_Testbench_behavior of SIPO_Testbench is
     end component SIPO;
 	
     -- Testbench constant
-	constant N : integer := 8; -- Data bits
+	constant N : integer := 4; -- Data bits
 	constant CLK_PERIOD : time := 10 ns; -- Clock period
 	
     -- Testbench signals
@@ -40,7 +40,7 @@ architecture SIPO_Testbench_behavior of SIPO_Testbench is
     signal reset_tb : STD_LOGIC := '0';
     signal enable_tb : STD_LOGIC := '0';
     signal data_in_tb : STD_LOGIC := '0';
-    signal data_out_tb : STD_LOGIC_VECTOR(N-1 downto 0);
+    signal data_out_tb : STD_LOGIC_VECTOR(N-1 downto 0) := (others => '0');
     
 begin
     
@@ -57,7 +57,7 @@ begin
 	-- Enable process
     enable_process: process
     begin
-        wait for CLK_PERIOD * 2;
+        wait for CLK_PERIOD;
 		enable_tb <= not enable_tb;
 		wait for CLK_PERIOD * 8;
 		enable_tb <= not enable_tb;

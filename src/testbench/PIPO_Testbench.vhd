@@ -32,15 +32,15 @@ architecture PIPO_Testbench_behavior of PIPO_Testbench is
     end component PIPO;
 	
     -- Testbench constant
-	constant N : integer := 8; -- Data bits
+	constant N : integer := 4; -- Data bits
 	constant CLK_PERIOD : time := 10 ns; -- Clock period
 	
     -- Testbench signals
     signal clk_tb : STD_LOGIC := '0';
     signal reset_tb : STD_LOGIC := '0';
     signal enable_tb : STD_LOGIC := '0';
-    signal data_in_tb : STD_LOGIC_VECTOR(N-1 downto 0);
-    signal data_out_tb : STD_LOGIC_VECTOR(N-1 downto 0);
+    signal data_in_tb : STD_LOGIC_VECTOR(N-1 downto 0) := (others => '0');
+    signal data_out_tb : STD_LOGIC_VECTOR(N-1 downto 0) := (others => '0');
     
 begin
     
@@ -66,23 +66,19 @@ begin
     begin
 		wait for CLK_PERIOD;
 		reset_tb <= not reset_tb;
-        wait for CLK_PERIOD * 4;
+        wait for CLK_PERIOD * 7;
 		reset_tb <= not reset_tb;
     end process;
 
     -- Main process
     main_process: process
     begin
-  
-        wait for 3 ns;
 
         data_in_tb <= (others => '0');
         wait for CLK_PERIOD;
  
-        data_in_tb <= "10101010"; 
-        wait for CLK_PERIOD * N + 2 ns;
-
-        data_in_tb <= (others => '0'); 
+        data_in_tb <= "1011"; 
+        wait for CLK_PERIOD * N;
 
     end process;
 

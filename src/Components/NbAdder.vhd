@@ -58,7 +58,7 @@ begin
         fai : FullAdder port map(a(k), b(k), carries(k), s(k), carries(k+1));
     end generate;
 	
-	mux : Mux_1x2 port map (sel, s, zero, sum); 
+	mux : Mux_1x2 generic map (Nb => Nb) port map (sel, s, zero, sum); 
 	
 	carries(0) <= '0';
 	sel <= overflow or underflow;
