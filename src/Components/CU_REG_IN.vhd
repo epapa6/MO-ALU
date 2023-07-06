@@ -2,8 +2,8 @@
 --
 -- Title       : CU_REG_IN
 -- Design      : MOALU
--- Author      : e.papa6@campus.unimib.it
--- Company     : Università degli Studi di Milano Bicocca
+-- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
+-- Company     : Universita' degli Studi di Milano Bicocca
 --
 -------------------------------------------------------------------------------
 --
@@ -15,19 +15,19 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 
 entity CU_REG_IN is
-	 port(
-	 	 clk : in STD_LOGIC := '0';
-	 	 reset : in STD_LOGIC := '0';
-		 enable : in STD_LOGIC := '0';
-		 control_bit : in STD_LOGIC := '0';
-		 count_a : in STD_LOGIC := '0';
-		 count_b : in STD_LOGIC := '0';
-		 enable_a : out STD_LOGIC := '0';
-		 enable_b : out STD_LOGIC := '0';
-		 reset_counter : out STD_LOGIC := '0';
-		 read_complete : out STD_LOGIC := '0';
-		 state : out STD_LOGIC_VECTOR(4 downto 0) := (others => '0') 
-	 );
+	port(
+	 	clk : in STD_LOGIC := '0';
+	 	reset : in STD_LOGIC := '0';
+		enable : in STD_LOGIC := '0';
+		control_bit : in STD_LOGIC := '0';
+		count_a : in STD_LOGIC := '0';
+		count_b : in STD_LOGIC := '0';
+		enable_a : out STD_LOGIC := '0';
+		enable_b : out STD_LOGIC := '0';
+		reset_counter : out STD_LOGIC := '0';
+		read_complete : out STD_LOGIC := '0';
+		state : out STD_LOGIC_VECTOR(4 downto 0) := (others => '0') 
+	);
 end CU_REG_IN;
 
 architecture CU_REG_IN_behavior of CU_REG_IN is
@@ -43,7 +43,7 @@ begin
 		variable state_output : STD_LOGIC_VECTOR (4 downto 0);
 	
 	begin
-		
+
 		case currentstate is
 			when STANDBY =>	output := "0000"; state_output := "00000";
 				case control_bit is
@@ -63,13 +63,13 @@ begin
 			when DONE => output := "0011"; state_output := "00011";
 				nextstate <= DONE;		
 		end case;
-			
+		
 		enable_a <= output(3);
 		enable_b <= output(2);
 		reset_counter <= output(1);
 		read_complete <= output(0);
 		state <= state_output;
-		
+
 	end process;
 	
 	cu_reset : process(clk, reset, enable)
@@ -81,5 +81,4 @@ begin
 		end if;
 	end process;
 	
-
 end CU_REG_IN_behavior;

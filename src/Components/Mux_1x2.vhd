@@ -16,12 +16,12 @@ use IEEE.std_logic_1164.all;
 
 entity Mux_1x2 is
 	generic (Nb : integer := 8);	
-	 port(
-		 selector : in STD_LOGIC;
-		 data_in_0 : in STD_LOGIC_VECTOR(Nb-1 downto 0);
-		 data_in_1 : in STD_LOGIC_VECTOR(Nb-1 downto 0);
-		 data_out : out STD_LOGIC_VECTOR(Nb-1 downto 0)
-	     );
+	port(
+		selector : in STD_LOGIC;
+		data_in_0 : in STD_LOGIC_VECTOR(Nb-1 downto 0);
+		data_in_1 : in STD_LOGIC_VECTOR(Nb-1 downto 0);
+		data_out : out STD_LOGIC_VECTOR(Nb-1 downto 0)
+	);
 end Mux_1x2;
 
 architecture Mux_1x2_behavior of Mux_1x2 is

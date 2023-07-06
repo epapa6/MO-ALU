@@ -2,8 +2,8 @@
 --
 -- Title       : MO_ALU
 -- Design      : MOALU
--- Author      : e.papa6@campus.unimib.it
--- Company     : Università degli Studi di Milano Bicocca
+-- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
+-- Company     : Universita' degli Studi di Milano Bicocca
 --
 -------------------------------------------------------------------------------
 --
@@ -15,18 +15,18 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 
 entity MO_ALU is
-	 generic(Nb : integer := 8);
-	 port(
-		 clk : in STD_LOGIC := '0';
-		 reset : in STD_LOGIC := '0';
-		 enable : in STD_LOGIC := '0';
-		 data_in : in STD_LOGIC := '0';
-		 control_bit : in STD_LOGIC := '0';
-		 operation_code : in STD_LOGIC_VECTOR(2 downto 0) := (others => '0');
-		 result : out STD_LOGIC_VECTOR(Nb-1 downto 0);
-		 a : out STD_LOGIC_VECTOR(Nb-1 downto 0);
-		 b : out STD_LOGIC_VECTOR(Nb-1 downto 0)
-	 );
+	generic(Nb : integer := 8);
+	port(
+		clk : in STD_LOGIC := '0';
+		reset : in STD_LOGIC := '0';
+		enable : in STD_LOGIC := '0';
+		data_in : in STD_LOGIC := '0';
+		control_bit : in STD_LOGIC := '0';
+		operation_code : in STD_LOGIC_VECTOR(2 downto 0) := (others => '0');
+		result : out STD_LOGIC_VECTOR(Nb-1 downto 0);
+		a : out STD_LOGIC_VECTOR(Nb-1 downto 0);
+		b : out STD_LOGIC_VECTOR(Nb-1 downto 0)
+	);
 end MO_ALU;
 
 architecture MO_ALU_behavior of MO_ALU is

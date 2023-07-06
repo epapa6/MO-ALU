@@ -2,8 +2,8 @@
 --
 -- Title       : REG_IN
 -- Design      : MOALU
--- Author      : e.papa6@campus.unimib.it
--- Company     : Università degli Studi di Milano Bicocca
+-- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
+-- Company     : Universita' degli Studi di Milano Bicocca
 --
 -------------------------------------------------------------------------------
 --
@@ -16,15 +16,15 @@ use IEEE.std_logic_1164.all;
 
 entity REG_IN is
 	generic(Nb : integer := 8);
-	 port(
-		 clk : in STD_LOGIC;
-		 reset : in STD_LOGIC;
-		 din : in STD_LOGIC;
-		 enable_a : in STD_LOGIC;
-		 enable_b : in STD_LOGIC;
-		 out_a : out STD_LOGIC_VECTOR(Nb-1 downto 0);
-		 out_b : out STD_LOGIC_VECTOR(Nb-1 downto 0)
-	     );
+	port(
+		clk : in STD_LOGIC;
+		reset : in STD_LOGIC;
+		din : in STD_LOGIC;
+		enable_a : in STD_LOGIC;
+		enable_b : in STD_LOGIC;
+		out_a : out STD_LOGIC_VECTOR(Nb-1 downto 0);
+		out_b : out STD_LOGIC_VECTOR(Nb-1 downto 0)
+	);
 end REG_IN;
 
 architecture REG_IN_behavior of REG_IN is

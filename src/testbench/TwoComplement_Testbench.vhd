@@ -3,7 +3,7 @@
 -- Title       : TwoComplement_Testbench
 -- Design      : MOALU
 -- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
--- Company     : Università degli Studi di Milano Bicocca
+-- Company     : Universita' degli Studi di Milano Bicocca
 --
 -------------------------------------------------------------------------------
 --
@@ -22,7 +22,7 @@ architecture TwoComplement_Testbench_behavior of TwoComplement_Testbench is
 	-- Component declaration
     component TwoComplement is
         generic (Nb : integer := 8);
-        port (
+        port(
 			data_in : in  STD_LOGIC_VECTOR(Nb-1 downto 0);
             data_out : out STD_LOGIC_VECTOR(Nb-1 downto 0)
         );

@@ -2,8 +2,8 @@
 --
 -- Title       : CU_REG_OUT_Testbench
 -- Design      : MOALU
--- Author      : e.papa6@campus.unimib.it
--- Company     : Università degli Studi di Milano Bicocca
+-- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
+-- Company     : Universita' degli Studi di Milano Bicocca
 --
 -------------------------------------------------------------------------------
 --
@@ -21,15 +21,15 @@ architecture CU_REG_OUT_Testbench_behavior of CU_REG_OUT_Testbench is
 
 	-- Component declaration
 	component CU_REG_OUT is
-        port(
-		 clk : in STD_LOGIC;
-		 reset : in STD_LOGIC;
-		 enable : in STD_LOGIC;
-		 operation_complete : in STD_LOGIC;
-		 enable_r : out STD_LOGIC;
-		 write_complete : out STD_LOGIC;
-		 state : out STD_LOGIC_VECTOR(4 downto 0)
-	 );
+    	port(
+		 	clk : in STD_LOGIC;
+		 	reset : in STD_LOGIC;
+		 	enable : in STD_LOGIC;
+		 	operation_complete : in STD_LOGIC;
+		 	enable_r : out STD_LOGIC;
+		 	write_complete : out STD_LOGIC;
+		 	state : out STD_LOGIC_VECTOR(4 downto 0)
+	 	);
     end component CU_REG_OUT;
 	
 	-- Testbench constant

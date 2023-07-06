@@ -15,14 +15,14 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 
 entity ALU is
-	 generic (Nb : integer := 8);
-	 port(
-		 a : in STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
-		 b : in STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
-		 op_a : in STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
-		 op_b : in STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
-		 r : out STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0')
-	 );
+	generic (Nb : integer := 8);
+	port(
+		a : in STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
+		b : in STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
+		op_a : in STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+		op_b : in STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+		r : out STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0')
+	);
 end ALU;
 
 architecture ALU_behavior of ALU is
@@ -43,7 +43,7 @@ architecture ALU_behavior of ALU is
 			data_in_1 : in STD_LOGIC_VECTOR(Nb-1 downto 0);
 			data_in_2 : in STD_LOGIC_VECTOR(Nb-1 downto 0);
 			data_out : out STD_LOGIC_VECTOR(Nb-1 downto 0)
-	);
+		);
 	end component;
 	
 	component NbAdder is
@@ -52,7 +52,7 @@ architecture ALU_behavior of ALU is
 	 		a : in STD_LOGIC_VECTOR(Nb-1 downto 0);
 			b : in STD_LOGIC_VECTOR(Nb-1 downto 0);
 			sum : out STD_LOGIC_VECTOR(Nb-1 downto 0)
-	);
+		);
 	end component;
 	
 	signal zero : STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');

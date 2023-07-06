@@ -2,8 +2,8 @@
 --
 -- Title       : NbCounter
 -- Design      : MOALU
--- Author      : e.papa6@campus.unimib.it
--- Company     : Università degli Studi di Milano Bicocca
+-- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
+-- Company     : Universita' degli Studi di Milano Bicocca
 --
 -------------------------------------------------------------------------------
 --
@@ -16,13 +16,13 @@ use IEEE.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity NbCounter is
-	 generic(Nb : integer := 8);
-	 port(
-		 clk : in STD_LOGIC := '0';
-		 reset : in STD_LOGIC := '0';
-		 enable : in STD_LOGIC := '0';
-		 output : out STD_LOGIC := '0'
-	 );
+	generic(Nb : integer := 8);
+	port(
+		clk : in STD_LOGIC := '0';
+		reset : in STD_LOGIC := '0';
+		enable : in STD_LOGIC := '0';
+		output : out STD_LOGIC := '0'
+	);
 end NbCounter;	
 
 architecture NbCounter_behavior of NbCounter is	
@@ -46,5 +46,4 @@ begin
 		end if;
 	end process;
 			
-
 end NbCounter_behavior;

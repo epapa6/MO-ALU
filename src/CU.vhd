@@ -2,8 +2,8 @@
 --
 -- Title       : CU
 -- Design      : MOALU
--- Author      : e.papa6@campus.unimib.it
--- Company     : Università degli Studi di Milano Bicocca
+-- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
+-- Company     : Universita' degli Studi di Milano Bicocca
 --
 -------------------------------------------------------------------------------
 --
@@ -15,19 +15,19 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 
 entity CU is
-	 generic (Nb : integer := 8);
-	 port(
-		 clk : in STD_LOGIC := '0';
-		 reset : in STD_LOGIC := '0';
-		 enable : in STD_LOGIC := '0';
-		 control_bit : in STD_LOGIC := '0';
-		 enable_a : out STD_LOGIC := '0';
-		 enable_b : out STD_LOGIC := '0';
-		 enable_r : out STD_LOGIC := '0';
-		 operation_code : in STD_LOGIC_VECTOR(2 downto 0) := (others => '0');
-		 operation_a : out STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
-		 operation_b : out STD_LOGIC_VECTOR(1 downto 0) := (others => '0')
-	 );
+	generic (Nb : integer := 8);
+	port(
+		clk : in STD_LOGIC := '0';
+		reset : in STD_LOGIC := '0';
+		enable : in STD_LOGIC := '0';
+		control_bit : in STD_LOGIC := '0';
+		enable_a : out STD_LOGIC := '0';
+		enable_b : out STD_LOGIC := '0';
+		enable_r : out STD_LOGIC := '0';
+		operation_code : in STD_LOGIC_VECTOR(2 downto 0) := (others => '0');
+		operation_a : out STD_LOGIC_VECTOR(1 downto 0) := (others => '0');
+		operation_b : out STD_LOGIC_VECTOR(1 downto 0) := (others => '0')
+	);
 end CU;
 
 architecture CU_behavior of CU is
@@ -87,16 +87,12 @@ architecture CU_behavior of CU is
 	
 	signal enable_reg_a : STD_LOGIC := '0';
 	signal out_a : STD_LOGIC := '0';
-	
 	signal en_reg_b : STD_LOGIC := '0';
 	signal out_b : STD_LOGIC := '0';
-	
 	signal reset_count : STD_LOGIC := '0';
-	
 	signal data_read : STD_LOGIC := '0';
 	signal data_wrote : STD_LOGIC := '0';
 	signal op_completed : STD_LOGIC := '0';
-	
 	signal state_reg_in : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
 	signal state_alu : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
 	signal state_reg_out : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');

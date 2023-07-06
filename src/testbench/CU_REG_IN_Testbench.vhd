@@ -2,8 +2,8 @@
 --
 -- Title       : CU_REG_IN_Testbench
 -- Design      : MOALU
--- Author      : e.papa6@campus.unimib.it
--- Company     : Università degli Studi di Milano Bicocca
+-- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
+-- Company     : Universita' degli Studi di Milano Bicocca
 --
 -------------------------------------------------------------------------------
 --
@@ -101,5 +101,4 @@ begin
 
     end process;
 	
-
 end CU_REG_IN_Testbench_behavior;
