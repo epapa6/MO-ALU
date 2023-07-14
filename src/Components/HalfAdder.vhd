@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 --
 -- Title       : HalfAdder
--- Design      : MOALU
+-- Design      : MO_ALU
 -- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
 -- Company     : Universita' degli Studi di Milano Bicocca
 --

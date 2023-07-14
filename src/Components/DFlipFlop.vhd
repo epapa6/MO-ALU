@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 --
 -- Title       : DFlipFlop
--- Design      : MOALU
+-- Design      : MO_ALU
 -- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
 -- Company     : Universita' degli Studi di Milano Bicocca
 --
@@ -30,9 +30,9 @@ begin
 	
 	process(clk, reset)
  	begin 
-     	if(reset='0') then 
+     	if reset='0' then 
    			q <= '0';
-		elsif(rising_edge(clk) and enable = '1') then
+		elsif rising_edge(clk) and enable = '1' then
    			q <= d; 
   		end if;      
  	end process;

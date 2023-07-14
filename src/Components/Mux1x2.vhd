@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 --
--- Title       : Mux_1x2
--- Design      : MOALU
+-- Title       : Mux1x2
+-- Design      : MO_ALU
 -- Author      : e.papa6@campus.unimib.it & d.gargaro@campus.unimib.it
 -- Company     : Universita' degli Studi di Milano Bicocca
 --
@@ -14,17 +14,17 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity Mux_1x2 is
-	generic (Nb : integer := 8);	
+entity Mux1x2 is
+	generic (Nb : integer);	
 	port(
 		selector : in STD_LOGIC;
 		data_in_0 : in STD_LOGIC_VECTOR(Nb-1 downto 0);
 		data_in_1 : in STD_LOGIC_VECTOR(Nb-1 downto 0);
 		data_out : out STD_LOGIC_VECTOR(Nb-1 downto 0)
 	);
-end Mux_1x2;
+end Mux1x2;
 
-architecture Mux_1x2_behavior of Mux_1x2 is
+architecture Mux1x2_behavior of Mux1x2 is
 begin
 
 	process (data_in_0, data_in_1, selector)
@@ -36,4 +36,4 @@ begin
     	end if;
   	end process;
 
-end Mux_1x2_behavior;
+end Mux1x2_behavior;
