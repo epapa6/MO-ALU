@@ -35,12 +35,26 @@ architecture CA2_behavior of CA2 is
 	
 	signal ndata_in : STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
 	signal one : STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
+	signal cdata_in : STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '0');
+	signal lowest : STD_LOGIC_VECTOR(Nb-1 downto 0) := (others => '1');
 
 begin
 
-	ca : NbAdder generic map (Nb) port map (ndata_in, one, data_out);
+	ca : NbAdder generic map (Nb) port map (ndata_in, one, cdata_in);
 	
 	ndata_in <= not data_in;
 	one(0) <= '1';
+	
+	process (cdata_in) 
+	
+	begin 
+		if (data_in = lowest) then
+			data_out <= (others => '0');
+		else
+			data_out <= cdata_in;
+		end if;
+	end process;
+	
+	
 	
 end CA2_behavior;
